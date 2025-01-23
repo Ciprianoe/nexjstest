@@ -29,14 +29,14 @@ const Mentorings: React.FC = () => {
 
   const toggleDetails = async (index: number) => {
     if (expandedIndex === index) {
-      setExpandedIndex(null); // Oculta detalles
-      setMentoringDetails(null); // Resetea los detalles
+      setExpandedIndex(null);
+      setMentoringDetails(null);
     } else {
       const mentoring = mentorings[index];
-      const details = await fetchMentoringDetails(mentoring.key); // Asegúrate de que Key esté disponible
+      const details = await fetchMentoringDetails(mentoring.key);
       if (details) {
-        setMentoringDetails(details); // Actualiza los detalles de la mentoría
-        setExpandedIndex(index); // Muestra detalles
+        setMentoringDetails(details);
+        setExpandedIndex(index);
       }
     }
   };
@@ -59,7 +59,7 @@ const Mentorings: React.FC = () => {
                 <p>{mentoringDetails.description}</p>
                 <p><strong>Título:</strong> {mentoringDetails.title}</p>
                 <p><strong>Precio:</strong> ${mentoringDetails.price}</p>
-                {mentoringDetails.promotionalPrice != null && !isNaN(mentoringDetails.promotionalPrice) && (
+                {mentoringDetails.promotionalPrice && (
                   <p><strong>Precio Promocional:</strong> ${mentoringDetails.promotionalPrice}</p>
                 )}
                 <p><strong>Impuesto:</strong> {mentoringDetails.tax}%</p>
@@ -68,8 +68,6 @@ const Mentorings: React.FC = () => {
                   <img src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoringDetails.image}`} alt={mentoringDetails.name} className="rounded-lg" />
                 </div>
                 <p><strong>Estado:</strong> {mentoringDetails.isActive ? 'Activo' : 'Inactivo'}</p>
-                
-                {/* Información del mentor */}
                 <div>
                   <h3 className="font-semibold">Mentor: {mentoringDetails.mentor.name}</h3>
                   <img src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoringDetails.mentor.avatar}`} alt={mentoringDetails.mentor.name} className="rounded-full h-16 w-16" />
@@ -79,6 +77,9 @@ const Mentorings: React.FC = () => {
                   <p><strong>Rol:</strong> {mentoringDetails.mentor.role}</p>
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(mentoringDetails.detail) }} />
+                <div className="flex justify-center mt-4">
+                  <button className="bg-black text-white rounded px-4 py-2">Cursos disponibles</button>
+                </div>
               </div>
             )}
           </li>
