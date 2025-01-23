@@ -1,15 +1,13 @@
 "use client";
-export default interface Characteristic {
+
+interface Characteristic {
     description: string;
     icon: string;
     isActive: boolean;
     name: string;
-    descriptionUno?: string; // Propiedad opcional
-    descriptionDos?: string; // Propiedad opcional
-    descriptionTres?: string; // Propiedad opcional
 }
 
-export default interface Mentorings {
+export default interface Courses {
     id: string;
     categoryKey: string;
     characteristics: Characteristic[];

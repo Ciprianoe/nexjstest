@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
                             <Link href="/mentorings" className={`text-gray-700 hover:text-primary ${pathname === '/mentorings' ? 'text-primary' : ''}`}>
                                 Mentorías
                             </Link>
-                            <Link href="/cursos" className={`text-gray-700 hover:text-primary ${pathname === '/cursos' ? 'text-primary' : ''}`}>
+                            <Link href="/courses" className={`text-gray-700 hover:text-primary ${pathname === '/courses' ? 'text-primary' : ''}`}>
                                 Cursos
                             </Link>
                         </div>
