@@ -15,7 +15,10 @@ const API_URL = 'https://load-qv4lgu7kga-uc.a.run.app/';
     return response.data.data.items; 
 };
 
-
+export const fetchCoursesD = async (pkey: string): Promise<{ items: courses[] }> => {
+  const response = await axios.get(`https://load-qv4lgu7kga-uc.a.run.app/courses/show?pKey=${pkey}`);
+  return { items: response.data.data.items }; 
+};
 
 export const fetchMentoringDetails = async (pKey: string) => {
   try {

@@ -1,9 +1,11 @@
 "use client";
 // components/Mentorias.tsx
 import React, { useEffect, useState } from 'react';
-import { fetchMentorings, fetchMentoringDetails } from '../services/api'; 
+import { fetchMentorings, fetchMentoringDetails, fetchCourses, fetchCoursesD } from '../services/api';
 import DOMPurify from 'dompurify';
 import Mentorings from '../interfaces/interfaces';
+import Courses from '../interfaces/courses';
+import { AxiosError } from 'axios';
 
 const Mentorings: React.FC = () => {
   const [mentorings, setMentorings] = useState<Mentorings[]>([]);
@@ -11,6 +13,8 @@ const Mentorings: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [mentoringDetails, setMentoringDetails] = useState<Mentorings | null>(null);
+  const [courses, setCourses] = useState<any[]>([]); // Cambia el tipo según tu interfaz de cursos
+  const [coursesLoading, setCoursesLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const getMentorings = async () => {
@@ -29,18 +33,47 @@ const Mentorings: React.FC = () => {
 
   const toggleDetails = async (index: number) => {
     if (expandedIndex === index) {
-      setExpandedIndex(null);
-      setMentoringDetails(null);
+      setExpandedIndex(null); // Oculta detalles
+      setMentoringDetails(null); // Resetea los detalles
+      setCourses([]); // Resetea los cursos
     } else {
       const mentoring = mentorings[index];
-      const details = await fetchMentoringDetails(mentoring.key);
+      const details = await fetchMentoringDetails(mentoring.key); // Asegúrate de que Key esté disponible
       if (details) {
-        setMentoringDetails(details);
-        setExpandedIndex(index);
+        setMentoringDetails(details); // Actualiza los detalles de la mentoría
+        setExpandedIndex(index); // Muestra detalles
       }
     }
   };
 
+  const handleFetchCourses = async () => {
+    setCoursesLoading(true);
+    try {
+        const response = await fetchCourses(); // Llama a la función sin pasarle la clave
+        console.log('Datos de cursos:', response); // Verifica la respuesta
+        setCourses(response); // Actualiza el estado con todos los cursos
+    } catch (err) {
+        const error = err as AxiosError; // Aserción de tipo
+        console.error('Error al cargar los cursos:', error.response ? error.response.data : error.message);
+    } finally {
+        setCoursesLoading(false);
+    }
+};
+
+/*   const handleFetchCourses = async (pkey: string) => {
+    setCoursesLoading(true);
+    try {
+        const response = await fetchCoursesD(pkey); // Llama a la función
+        console.log('Datos de cursos:', response);
+        setCourses(response.items); // Accede a items y actualiza el estado
+    } catch (err) {
+        const error = err as AxiosError; // Aserción de tipo
+        console.error('Error al cargar los cursos:', error.response ? error.response.data : error.message);
+    } finally {
+        setCoursesLoading(false);
+    }
+};
+ */
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>{error}</div>;
 
@@ -59,15 +92,15 @@ const Mentorings: React.FC = () => {
                 <p>{mentoringDetails.description}</p>
                 <p><strong>Título:</strong> {mentoringDetails.title}</p>
                 <p><strong>Precio:</strong> ${mentoringDetails.price}</p>
-                {mentoringDetails.promotionalPrice && (
-                  <p><strong>Precio Promocional:</strong> ${mentoringDetails.promotionalPrice}</p>
-                )}
+                <p><strong>Precio Promocional:</strong> ${mentoringDetails.promotionalPrice}</p>
                 <p><strong>Impuesto:</strong> {mentoringDetails.tax}%</p>
                 <p><strong>Actualizado el:</strong> {new Date(mentoringDetails.updatedAt).toLocaleDateString()}</p>
                 <div className="flex-shrink-0">
                   <img src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoringDetails.image}`} alt={mentoringDetails.name} className="rounded-lg" />
                 </div>
                 <p><strong>Estado:</strong> {mentoringDetails.isActive ? 'Activo' : 'Inactivo'}</p>
+
+                {/* Información del mentor */}
                 <div>
                   <h3 className="font-semibold">Mentor: {mentoringDetails.mentor.name}</h3>
                   <img src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoringDetails.mentor.avatar}`} alt={mentoringDetails.mentor.name} className="rounded-full h-16 w-16" />
@@ -77,9 +110,32 @@ const Mentorings: React.FC = () => {
                   <p><strong>Rol:</strong> {mentoringDetails.mentor.role}</p>
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(mentoringDetails.detail) }} />
-                <div className="flex justify-center mt-4">
-                  <button className="bg-black text-white rounded px-4 py-2">Cursos disponibles</button>
-                </div>
+
+                {/* Botón para cargar cursos */}
+                {mentoringDetails.isActive && (
+                  <div className='flex justify-center mt-4'>
+                    <button onClick={handleFetchCourses} className="mt-4 bg-black text-white rounded px-4 py-2">
+                      Cursos Disponibles
+                    </button>
+                  </div>
+
+                )}
+
+                {/* Mostrar cursos si están disponibles */}
+                {coursesLoading ? (
+                  <p>Cargando cursos...</p>
+                ) : (
+                  courses.length > 0 && (
+                    <div className="mt-4">
+                      <h3 className="font-semibold">Cursos Disponibles:</h3>
+                      <ul>
+                        {courses.map(course => (
+                          <li key={course.categoryKey} className="mt-2">{course.name}</li> // Asegúrate de que 'id' y 'name' existan en tu objeto de curso
+                        ))}
+                      </ul>
+                    </div>
+                  )
+                )}
               </div>
             )}
           </li>
