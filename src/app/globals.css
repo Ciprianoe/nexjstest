@@ -19,3 +19,18 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer base {
+  h1 {
+    @apply text-3xl font-bold text-primary;
+  }
+  p {
+    @apply text-gray-700;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white shadow-lg rounded-lg p-4;
+  }
+}
