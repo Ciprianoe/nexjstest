@@ -33,7 +33,7 @@ const Mentorings: React.FC = () => {
       setMentoringDetails(null); // Resetea los detalles
     } else {
       const mentoring = mentorings[index];
-      const details = await fetchMentoringDetails(mentoring.key); // Asegúrate de que pKey esté disponible
+      const details = await fetchMentoringDetails(mentoring.key); // Asegúrate de que Key esté disponible
       if (details) {
         setMentoringDetails(details); // Actualiza los detalles de la mentoría
         setExpandedIndex(index); // Muestra detalles
@@ -59,7 +59,9 @@ const Mentorings: React.FC = () => {
                 <p>{mentoringDetails.description}</p>
                 <p><strong>Título:</strong> {mentoringDetails.title}</p>
                 <p><strong>Precio:</strong> ${mentoringDetails.price}</p>
-                <p><strong>Precio Promocional:</strong> ${mentoringDetails.promotionalPrice}</p>
+                {mentoringDetails.promotionalPrice != null && !isNaN(mentoringDetails.promotionalPrice) && (
+                  <p><strong>Precio Promocional:</strong> ${mentoringDetails.promotionalPrice}</p>
+                )}
                 <p><strong>Impuesto:</strong> {mentoringDetails.tax}%</p>
                 <p><strong>Actualizado el:</strong> {new Date(mentoringDetails.updatedAt).toLocaleDateString()}</p>
                 <div className="flex-shrink-0">
