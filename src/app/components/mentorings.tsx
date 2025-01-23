@@ -1,10 +1,9 @@
 "use client";
 // components/Mentorias.tsx
 import React, { useEffect, useState } from 'react';
-import { fetchMentorings, fetchMentoringDetails, fetchCourses, fetchCoursesD } from '../services/api';
+import { fetchMentorings, fetchMentoringDetails, fetchCourses} from '../services/api';
 import DOMPurify from 'dompurify';
 import Mentorings from '../interfaces/interfaces';
-import Courses from '../interfaces/courses';
 import { AxiosError } from 'axios';
 
 const Mentorings: React.FC = () => {
@@ -46,7 +45,9 @@ const Mentorings: React.FC = () => {
     }
   };
 
-  const handleFetchCourses = async () => {
+/*  
+esta funcion no limpia mi estado pero la dejo para info 
+const handleFetchCourses = async () => {
     setCoursesLoading(true);
     try {
         const response = await fetchCourses(); // Llama a la función sin pasarle la clave
@@ -58,23 +59,28 @@ const Mentorings: React.FC = () => {
     } finally {
         setCoursesLoading(false);
     }
+}; */
+const handleFetchCourses = async () => {
+  if (courses.length > 0) {
+      // Si ya hay cursos, limpia el estado
+      setCourses([]);
+  } else {
+      // Si no hay cursos, procede a cargarlos
+      setCoursesLoading(true);
+      try {
+          const response = await fetchCourses(); // Llama a la función sin pasarle la clave
+          console.log('Datos de cursos:', response); // Verifica la respuesta
+          setCourses(response); // Actualiza el estado con todos los cursos
+      } catch (err) {
+          const error = err as AxiosError; // Aserción de tipo
+          console.error('Error al cargar los cursos:', error.response ? error.response.data : error.message);
+      } finally {
+          setCoursesLoading(false);
+      }
+  }
 };
 
-/*   const handleFetchCourses = async (pkey: string) => {
-    setCoursesLoading(true);
-    try {
-        const response = await fetchCoursesD(pkey); // Llama a la función
-        console.log('Datos de cursos:', response);
-        setCourses(response.items); // Accede a items y actualiza el estado
-    } catch (err) {
-        const error = err as AxiosError; // Aserción de tipo
-        console.error('Error al cargar los cursos:', error.response ? error.response.data : error.message);
-    } finally {
-        setCoursesLoading(false);
-    }
-};
- */
-  if (loading) return <div>Cargando...</div>;
+  if (loading) return <div></div>;
   if (error) return <div>{error}</div>;
 
   return (
