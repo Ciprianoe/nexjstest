@@ -1,8 +1,8 @@
 "use client";
 // components/Courses.tsx
 import React, { useEffect, useState } from 'react';
-import { fetchCourses, fetchMentorings } from '../services/api';
-import Courses from '../interfaces/courses'; 
+import { fetchCourses, fetchMentorings, fetchCoursesD  } from '../services/api';
+import Courses from '../interfaces/courses';
 import Mentorings from '../interfaces/interfaces';
 import { AxiosError } from 'axios';
 
@@ -15,7 +15,7 @@ const CoursesComponent: React.FC = () => {
   const [courseDetails, setCourseDetails] = useState<Courses | null>(null);
   const [coursesLoading, setCoursesLoading] = useState<boolean>(false);
   const [mentoringsLoading, setMentoringsLoading] = useState<boolean>(false);
-  const [showMentorings, setShowMentorings] = useState<boolean>(false); 
+  const [showMentorings, setShowMentorings] = useState<boolean>(false);
 
   useEffect(() => {
     const getCourses = async () => {
@@ -31,21 +31,25 @@ const CoursesComponent: React.FC = () => {
 
     getCourses();
   }, []);
-
+ 
   const toggleDetails = async (index: number) => {
     if (expandedIndex === index) {
-      setExpandedIndex(null);
-      setCourseDetails(null);
-      setShowMentorings(false); 
+      setExpandedIndex(null); // Oculta detalles
+      setCourseDetails(null); // Resetea los detalles
+      setShowMentorings(false);      
     } else {
       const course = courses[index];
-      setCourseDetails(course);
-      setExpandedIndex(index);
-      setShowMentorings(false); 
+      const details = await fetchCoursesD(course.key); // Asegúrate de que Key esté disponible
+      if (details) {
+        setCourseDetails(details); // Actualiza los detalles de la mentoría
+        setExpandedIndex(index); // Muestra detalles
+        setShowMentorings(false); 
+        localStorage.setItem('selectedCourse', JSON.stringify(details));  
+      }
     }
   };
 
-  const handleFetchMentorings = async () => {
+ /*  const handleFetchMentorings = async () => {
     if (showMentorings) {
       setShowMentorings(false); // Si ya están visibles, oculta
     } else {
@@ -61,6 +65,24 @@ const CoursesComponent: React.FC = () => {
         setMentoringsLoading(false);
       }
     }
+  }; */
+
+  const handleFetchMentorings = async () => {
+    setShowMentorings((prevState) => !prevState);
+    if (!showMentorings) {
+      setMentoringsLoading(true);
+      try {
+        const data = await fetchMentorings();
+        setMentorings(data);
+      } catch (err) {
+        const error = err as AxiosError;
+        console.error('Error al cargar las mentorías:', error.response ? error.response.data : error.message);
+      } finally {
+        setMentoringsLoading(false);
+      }
+    } else {
+      setMentorings([]);
+    }
   };
 
   if (loading) return <div>Cargando...</div>;
@@ -69,51 +91,58 @@ const CoursesComponent: React.FC = () => {
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-2xl font-bold mb-4">Cursos</h1>
-      <ul className="space-y-4">
-        {courses.map((course, index) => (
-          <li key={course.categoryKey} className="mx-auto flex max-w-sm flex-col gap-y-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
-            <h2 className="text-xl font-bold text-primary">{course.name}</h2>
-            <button onClick={() => toggleDetails(index)} className="mt-2 bg-blue-500 text-white rounded px-4 py-2">
-              {expandedIndex === index ? 'Ver menos' : 'Más info'}
-            </button>
-            {expandedIndex === index && courseDetails && (
-              <div className="mt-4">
-                <p>{courseDetails.description}</p>
-                <p><strong>Título:</strong> {courseDetails.title}</p>
-                <p><strong>Precio:</strong> ${courseDetails.price}</p>
-                <p><strong>Impuesto:</strong> {courseDetails.tax}%</p>
-                <p><strong>Última Actualización:</strong> {new Date(courseDetails.updatedAt).toLocaleDateString()}</p>
-                <div className="flex-shrink-0">
-                  <img src={`https://load-qv4lgu7kga-uc.a.run.app/images/${courseDetails.image}`} alt={courseDetails.name} className="rounded-lg" />
+      {courses.length === 0 ? (
+        <div>No hay cursos disponibles.</div>
+      ) : (
+        <ul className="space-y-4">
+          {courses.map((course, index) => (
+            <li key={course.categoryKey} className="mx-auto flex max-w-sm flex-col gap-y-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+              <h2 className="text-xl font-bold text-primary">{course.name}</h2>
+              <button onClick={() => toggleDetails(index)}   className="mt-2 bg-blue-500 text-white rounded px-4 py-2">
+                {expandedIndex === index ? 'Ver menos' : 'Más info'}
+              </button>
+              {expandedIndex === index && courseDetails ? (
+                <div className="mt-4">
+                  <p>{courseDetails.description}</p>
+                  <p><strong>Título:</strong> {courseDetails.title}</p>
+                  <p><strong>Precio:</strong> ${courseDetails.price}</p>
+                  <p><strong>Impuesto:</strong> {courseDetails.tax}%</p>
+                  <p><strong>Última Actualización:</strong> {new Date(courseDetails.updatedAt).toLocaleDateString()}</p>
+                  <p><strong>Creado el:</strong> {new Date(courseDetails.createdAt).toLocaleDateString()}</p>
+                  <p><strong>Ranking:</strong> {courseDetails.ranking}</p>
+                  <p><strong>Cantidad:</strong> {courseDetails.quantity}</p>
+                  <p><strong>Vistas:</strong> {courseDetails.view}</p>     
+                  <p><strong>Class:</strong> {courseDetails.class[0].resource.name}</p>                                   
+                  <div className="flex-shrink-0">
+                    <img src={`https://load-qv4lgu7kga-uc.a.run.app/images/${courseDetails.image}`} alt={courseDetails.name} className="rounded-lg" />
+                  </div>
+                  <div className='flex justify-center mt-4'>
+                    <button onClick={handleFetchMentorings} className="mt-4 bg-black text-white rounded px-4 py-2">
+                      Mentorías Disponibles
+                    </button>
+                  </div>
+                  {mentoringsLoading ? (
+                    <p>Cargando Mentorías...</p>
+                  ) : (
+                    mentorings.length > 0 && (
+                      <div className="mt-4">
+                        <h3 className="font-semibold">Mentorías Disponibles:</h3>
+                        <ul>
+                          {mentorings.map(mentoring => (
+                            <li key={mentoring.categoryKey} className="mt-2">{mentoring.title}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )
+                  )}
                 </div>
-                <p><strong>Disponibilidad:</strong> {courseDetails.isActive ? 'Disponible' : 'No Disponible'}</p>
-                
-                <div className='flex justify-center mt-4'>
-                  <button onClick={handleFetchMentorings} className="mt-4 bg-black text-white rounded px-4 py-2">
-                   Mentorias Disponibles
-                  </button>
-                </div>
-
-                {/* Mostrar Mentorías si están disponibles */}
-                {mentoringsLoading ? (
-                  <p>Cargando Mentorías...</p>
-                ) : (
-                  showMentorings && mentorings.length > 0 && (
-                    <div className="mt-4">
-                      <h3 className="font-semibold">Mentorias Disponibles:</h3>
-                      <ul>
-                        {mentorings.map(mentoring => (
-                          <li key={mentoring.categoryKey} className="mt-2">{mentoring.title}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )
-                )}
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+              ) : (
+                expandedIndex === index && <div>No hay detalles del curso disponibles.</div>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

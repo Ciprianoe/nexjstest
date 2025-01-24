@@ -15,10 +15,14 @@ const API_URL = 'https://load-qv4lgu7kga-uc.a.run.app/';
     return response.data.data.items; 
 };
 
-export const fetchCoursesD = async (pkey: string): Promise<{ items: courses[] }> => {
-  const response = await axios.get(`https://load-qv4lgu7kga-uc.a.run.app/courses/show?pKey=${pkey}`);
-  return { items: response.data.data.items }; 
+
+export const fetchCoursesD = async (pkey: string): Promise<courses> => {
+  const response = await axios.get(`${API_URL}/Courses/show?pKey=${pkey}`);
+  console.log("Data received from fetchCoursesD:", response);
+  return response.data.data.item; // Asegúrate de que esto sea correcto según la respuesta de tu API
 };
+
+
 
 export const fetchMentoringDetails = async (pKey: string) => {
   try {

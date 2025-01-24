@@ -1,4 +1,22 @@
 "use client";
+interface Resource {
+    [x: string]: any;
+    file: string;
+    name: string;
+}
+
+interface Class {
+    [x: string]: any;
+    courseKey: string;
+    createdAt: string;
+    description: string;
+    isActive: boolean;
+    name: string;
+    orden: number;   
+    video: string;
+    key: string;
+}
+
 
 interface Characteristic {
     description: string;
@@ -8,6 +26,7 @@ interface Characteristic {
 }
 
 export default interface Courses {
+    [x: string]: any;
     id: string;
     categoryKey: string;
     characteristics: Characteristic[];
@@ -23,6 +42,11 @@ export default interface Courses {
     tax: number; 
     title: string; 
     updatedAt: string; 
+    createdAt: string; 
+    ranking: number; 
+    quantity: number; 
+    view: number; 
+    class: Class[]; 
     mentor: { 
         avatar: string;
         biography: string;
@@ -32,4 +56,6 @@ export default interface Courses {
         numberOfMentoring: number;
         role: string;
     };
+    resource:Resource[];
+   
 }
