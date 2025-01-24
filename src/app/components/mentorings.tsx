@@ -4,15 +4,15 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { fetchMentorings, fetchMentoringDetails, fetchCourses } from '../services/api';
 import DOMPurify from 'dompurify';
-import Mentorings from '../interfaces/interfaces';
+import MentoringsInterface  from '../interfaces/interfaces';
 import { AxiosError } from 'axios';
 
 const Mentorings: React.FC = () => {
-  const [mentorings, setMentorings] = useState<Mentorings[]>([]);
+  const [mentorings, setMentorings] = useState<MentoringsInterface []>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-  const [mentoringDetails, setMentoringDetails] = useState<Mentorings | null>(null);
+  const [mentoringDetails, setMentoringDetails] = useState<MentoringsInterface  | null>(null);
   const [courses, setCourses] = useState<any[]>([]);
   const [coursesLoading, setCoursesLoading] = useState<boolean>(false);
 
@@ -79,6 +79,7 @@ const Mentorings: React.FC = () => {
                   src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoring.image}`}
                   alt={mentoring.name}
                   className="h-24 w-24 rounded-lg mr-4"
+                  width={640} height={480}
                 />
                 <h2 className="text-xl font-bold text-primary">{mentoring.name}</h2>
               </div>
@@ -103,7 +104,8 @@ const Mentorings: React.FC = () => {
                       <Image
                         src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoringDetails.mentor.avatar}`}
                         alt={mentoringDetails.mentor.name}
-                        className="rounded-full h-16 w-16 mr-4" />
+                        className="rounded-full h-16 w-16 mr-4"
+                        width={640} height={480} />
                       <h3 className="font-semibold">Mentor: {mentoringDetails.mentor.name}</h3>
                     </div>
                     <p><strong>Email:</strong> {mentoringDetails.mentor.email}</p>
