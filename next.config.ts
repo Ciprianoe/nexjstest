@@ -2,8 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  images: {
-    domains: ['load-qv4lgu7kga-uc.a.run.app'], // Add your image domain here
+  images: {   
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'load-qv4lgu7kga-uc.a.run.app',
+        pathname: '**',
+      },
+    ],
   },
   // Other config options can go here
 };

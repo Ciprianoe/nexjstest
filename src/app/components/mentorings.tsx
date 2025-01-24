@@ -63,7 +63,13 @@ const Mentorings: React.FC = () => {
     }
   };
 
-  if (loading) return <div>Cargando...</div>;
+  const formattedDate = mentoringDetails ? new Date(mentoringDetails.updatedAt).toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }) : '';
+
+  if (loading) return <div> </div>;
   if (error) return <div>{error}</div>;
 
   return (
@@ -95,8 +101,8 @@ const Mentorings: React.FC = () => {
                     <p><strong>Descripción:</strong> {mentoringDetails.description}</p>
                     <p><strong>Precio:</strong> ${mentoringDetails.price}</p>
                     <p><strong>Precio Promocional:</strong> ${mentoringDetails.promotionalPrice}</p>
-                    <p><strong>Impuesto:</strong> {mentoringDetails.tax}%</p>
-                    <p><strong>Actualizado el:</strong> {new Date(mentoringDetails.updatedAt).toLocaleDateString()}</p>
+                    <p><strong>Impuesto:</strong> {mentoringDetails.tax}%</p>                    
+                    <p><strong>Actualizado el:</strong> {formattedDate}</p>
                     <p><strong>Disponibilidad:</strong> {mentoringDetails.isActive ? 'Disponible' : 'No Disponible'}</p>
                     
                     <h2 className="text-xl font-bold text-primary">Información del Mentor:</h2>

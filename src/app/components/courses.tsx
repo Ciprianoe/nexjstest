@@ -66,7 +66,18 @@ const CoursesComponent: React.FC = () => {
       setMentorings([]);
     }
   };
-
+  const formattedDate = courseDetails ? new Date(courseDetails.updatedAt).toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }) : '';
+  
+  const formattedDateC = courseDetails ? new Date(courseDetails.createdAt).toLocaleDateString('es-ES', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }) : '';
+  
   if (loading) return <div></div>;
   if (error) return <div>{error}</div>;
 
@@ -93,8 +104,8 @@ const CoursesComponent: React.FC = () => {
                   <p><strong>Título:</strong> {courseDetails.title}</p>
                   <p><strong>Precio:</strong> ${courseDetails.price}</p>
                   <p><strong>Impuesto:</strong> {courseDetails.tax}%</p>
-                  <p><strong>Última Actualización:</strong> {new Date(courseDetails.updatedAt).toLocaleDateString()}</p>
-                  <p><strong>Creado el:</strong> {new Date(courseDetails.createdAt).toLocaleDateString()}</p>
+                  <p><strong>Última Actualización:</strong> {formattedDate}</p>
+                  <p><strong>Creado el:</strong> {formattedDateC}</p>
                   <p><strong>Ranking:</strong> {courseDetails.ranking}</p>
                   <p><strong>Cantidad:</strong> {courseDetails.quantity}</p>
                   <p><strong>Vistas:</strong> {courseDetails.view}</p>
