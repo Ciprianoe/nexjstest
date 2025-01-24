@@ -129,7 +129,7 @@ const Mentorings: React.FC = () => {
     day: 'numeric',
   }) : '';
 
-  if (loading) return <div>Cargando...</div>;
+  if (loading) return <div></div>;
   if (error) return <div>{error}</div>;
 
   return (
