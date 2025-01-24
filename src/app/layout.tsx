@@ -24,14 +24,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+      {/* Agregar el CSS de SweetAlert2 desde el CDN */}
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+      />
+    </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>
-      <script src="sweetalert2.all.min.js"></script>
+      {/* <script src="sweetalert2.all.min.js"></script>
       <script src="sweetalert2.min.js"></script>
-      <link rel="stylesheet" href="sweetalert2.min.css"></link>
+      <link rel="stylesheet" href="sweetalert2.min.css"></link> */}
+      {/* Agregar el JS de SweetAlert2 desde el CDN */}
+    {/* <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script> */}
     </html>
   );
 }
