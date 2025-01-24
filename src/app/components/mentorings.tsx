@@ -1,6 +1,7 @@
 "use client";
 // components/Mentorias.tsx BY CEEM
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { fetchMentorings, fetchMentoringDetails, fetchCourses } from '../services/api';
 import DOMPurify from 'dompurify';
 import Mentorings from '../interfaces/interfaces';
@@ -74,7 +75,7 @@ const Mentorings: React.FC = () => {
           mentoring.name && mentoring.image ? (
             <li key={mentoring.categoryKey} className="flex flex-col gap-y-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10 max-w-sm">
               <div className="flex items-center">
-                <img
+                <Image
                   src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoring.image}`}
                   alt={mentoring.name}
                   className="h-24 w-24 rounded-lg mr-4"
@@ -99,7 +100,7 @@ const Mentorings: React.FC = () => {
                     
                     <h2 className="text-xl font-bold text-primary">Información del Mentor:</h2>
                     <div className="flex items-center">
-                      <img
+                      <Image
                         src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoringDetails.mentor.avatar}`}
                         alt={mentoringDetails.mentor.name}
                         className="rounded-full h-16 w-16 mr-4" />

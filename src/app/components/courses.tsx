@@ -1,6 +1,7 @@
 "use client";
 // components/Courses.tsx BY CEEM
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { fetchCourses, fetchMentorings, fetchCoursesD } from '../services/api';
 import Courses from '../interfaces/courses';
 import Mentorings from '../interfaces/interfaces';
@@ -80,7 +81,7 @@ const CoursesComponent: React.FC = () => {
           {courses.map((course, index) => (
             <li key={course.categoryKey} className="mx-auto flex max-w-sm flex-col gap-y-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
               <div className="flex items-center">
-                <img src={`https://load-qv4lgu7kga-uc.a.run.app/images/${course.image}`} alt={course.name} className="h-24 w-24 rounded-lg mr-4" />
+                <Image src={`https://load-qv4lgu7kga-uc.a.run.app/images/${course.image}`} alt={course.name} className="h-24 w-24 rounded-lg mr-4" />
                 <h2 className="text-xl font-bold text-primary">{course.name}</h2>
               </div>
 
