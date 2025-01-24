@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchMentorings, fetchMentoringDetails, fetchCourses } from '../services/api';
 import DOMPurify from 'dompurify';
-import Mentorings from '../interfaces/interfaces';
+import type Mentorings from '../interfaces/interfaces';
 import { AxiosError } from 'axios';
 
 const Mentorings: React.FC = () => {
@@ -32,10 +32,12 @@ const Mentorings: React.FC = () => {
 
   const toggleDetails = async (index: number) => {
     if (expandedIndex === index) {
+      // Si la tarjeta ya está expandida, la colapsamos
       setExpandedIndex(null);
       setMentoringDetails(null);
       setCourses([]);
     } else {
+      // Si estamos expandiendo una nueva tarjeta, colapsamos la anterior
       const mentoring = mentorings[index];
       const details = await fetchMentoringDetails(mentoring.key);
       if (details) {
@@ -45,13 +47,16 @@ const Mentorings: React.FC = () => {
     }
   };
 
-  const handleFetchCourses = async () => {
+  const handleFetchCourses = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation(); // Evita que el clic colapse la tarjeta
+
+    // Verificar si ya hay cursos cargados
     if (courses.length > 0) {
-      setCourses([]);
+      setCourses([]); // Limpiar cursos si ya hay cursos cargados
     } else {
       setCoursesLoading(true);
       try {
-        const response = await fetchCourses();
+        const response = await fetchCourses(); // Traer todos los cursos
         setCourses(response);
       } catch (err) {
         const error = err as AxiosError;
@@ -61,6 +66,8 @@ const Mentorings: React.FC = () => {
       }
     }
   };
+
+
 
   if (loading) return <div>Cargando...</div>;
   if (error) return <div>{error}</div>;
@@ -114,7 +121,6 @@ const Mentorings: React.FC = () => {
                       <p><strong>Rol:</strong> {mentoringDetails.mentor.role}</p>
 
                       <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(mentoringDetails.detail) }} />
-
                       {mentoringDetails.isActive && (
                         <div className='flex justify-center mt-4'>
                           <button onClick={handleFetchCourses} className="mt-4 bg-black text-white rounded px-4 py-2">
