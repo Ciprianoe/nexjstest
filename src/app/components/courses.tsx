@@ -1,7 +1,7 @@
 "use client";
-// components/Courses.tsx
+// components/Courses.tsx BY CEEM
 import React, { useEffect, useState } from 'react';
-import { fetchCourses, fetchMentorings, fetchCoursesD  } from '../services/api';
+import { fetchCourses, fetchMentorings, fetchCoursesD } from '../services/api';
 import Courses from '../interfaces/courses';
 import Mentorings from '../interfaces/interfaces';
 import { AxiosError } from 'axios';
@@ -31,41 +31,23 @@ const CoursesComponent: React.FC = () => {
 
     getCourses();
   }, []);
- 
+
   const toggleDetails = async (index: number) => {
     if (expandedIndex === index) {
       setExpandedIndex(null); // Oculta detalles
       setCourseDetails(null); // Resetea los detalles
-      setShowMentorings(false);      
+      setShowMentorings(false);
     } else {
       const course = courses[index];
       const details = await fetchCoursesD(course.key); // Asegúrate de que Key esté disponible
       if (details) {
         setCourseDetails(details); // Actualiza los detalles de la mentoría
         setExpandedIndex(index); // Muestra detalles
-        setShowMentorings(false); 
-        localStorage.setItem('selectedCourse', JSON.stringify(details));  
+        setShowMentorings(false);
+        localStorage.setItem('selectedCourse', JSON.stringify(details));
       }
     }
   };
-
- /*  const handleFetchMentorings = async () => {
-    if (showMentorings) {
-      setShowMentorings(false); // Si ya están visibles, oculta
-    } else {
-      setMentoringsLoading(true);
-      try {
-        const data = await fetchMentorings();
-        setMentorings(data);
-        setShowMentorings(true); // Muestra mentorías
-      } catch (err) {
-        const error = err as AxiosError;
-        console.error('Error al cargar las mentorías:', error.response ? error.response.data : error.message);
-      } finally {
-        setMentoringsLoading(false);
-      }
-    }
-  }; */
 
   const handleFetchMentorings = async () => {
     setShowMentorings((prevState) => !prevState);
@@ -85,7 +67,7 @@ const CoursesComponent: React.FC = () => {
     }
   };
 
-  if (loading) return <div>Cargando...</div>;
+  if (loading) return <div></div>;
   if (error) return <div>{error}</div>;
 
   return (
@@ -97,8 +79,12 @@ const CoursesComponent: React.FC = () => {
         <ul className="space-y-4">
           {courses.map((course, index) => (
             <li key={course.categoryKey} className="mx-auto flex max-w-sm flex-col gap-y-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
-              <h2 className="text-xl font-bold text-primary">{course.name}</h2>
-              <button onClick={() => toggleDetails(index)}   className="mt-2 bg-blue-500 text-white rounded px-4 py-2">
+              <div className="flex items-center">
+                <img src={`https://load-qv4lgu7kga-uc.a.run.app/images/${course.image}`} alt={course.name} className="h-24 w-24 rounded-lg mr-4" />
+                <h2 className="text-xl font-bold text-primary">{course.name}</h2>
+              </div>
+
+              <button onClick={() => toggleDetails(index)} className="mt-2 bg-blue-500 text-white rounded px-4 py-2">
                 {expandedIndex === index ? 'Ver menos' : 'Más info'}
               </button>
               {expandedIndex === index && courseDetails ? (
@@ -111,10 +97,15 @@ const CoursesComponent: React.FC = () => {
                   <p><strong>Creado el:</strong> {new Date(courseDetails.createdAt).toLocaleDateString()}</p>
                   <p><strong>Ranking:</strong> {courseDetails.ranking}</p>
                   <p><strong>Cantidad:</strong> {courseDetails.quantity}</p>
-                  <p><strong>Vistas:</strong> {courseDetails.view}</p>     
-                  <p><strong>Class:</strong> {courseDetails.class[0].resource.name}</p>                                   
-                  <div className="flex-shrink-0">
-                    <img src={`https://load-qv4lgu7kga-uc.a.run.app/images/${courseDetails.image}`} alt={courseDetails.name} className="rounded-lg" />
+                  <p><strong>Vistas:</strong> {courseDetails.view}</p>
+                  <div>
+                    <h2 className="text-xl font-bold text-primary">Material de Apoyo:</h2>
+                    {courseDetails.class.map((courseClass, index) => (
+                      <div key={index} className="mb-4">
+                        <p><strong>Clase #{index + 1}:</strong> {courseClass.name}</p>
+                        <p><strong>Recursos:</strong> {courseClass.resource.name}</p>
+                      </div>
+                    ))}
                   </div>
                   <div className='flex justify-center mt-4'>
                     <button onClick={handleFetchMentorings} className="mt-4 bg-black text-white rounded px-4 py-2">

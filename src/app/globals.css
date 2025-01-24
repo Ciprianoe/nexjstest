@@ -32,5 +32,10 @@ body {
 @layer components {
   .card {
     @apply bg-white shadow-lg rounded-lg p-4;
+    @apply min-width: 300px; /* Ajusta el ancho mínimo según sea necesario */
+    @apply max-width: 300px; /* Ajusta el ancho máximo según sea necesario */
+    @apply height: 400px; /* Ajusta la altura según sea necesario */
+    
   }
 }
+

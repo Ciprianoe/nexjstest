@@ -1,7 +1,5 @@
 "use client";
 
-
-
 export default interface Characteristic {
     description: string;
     icon: string;

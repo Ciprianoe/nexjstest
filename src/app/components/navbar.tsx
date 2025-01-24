@@ -1,4 +1,5 @@
-"use client";
+"use client"; 
+//components/navbar.tsx  BY CEEM
 import Link from 'next/link';
 import React from 'react';
 import { usePathname } from 'next/navigation'; // Importa usePathname
