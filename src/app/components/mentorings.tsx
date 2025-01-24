@@ -91,6 +91,7 @@ const Mentorings: React.FC = () => {
                     <div className="mt-4">
                       <p><strong>Título:</strong> {mentoringDetails.title}</p>
                       <p><strong>Descripción:</strong> {mentoringDetails.description}</p>
+                      <h2 className="text-xl font-bold text-primary">Inversion Inicial:</h2>
                       <p><strong>Precio:</strong> ${mentoringDetails.price}</p>
                       {!mentoringDetails.promotionalPrice && (
                         <p><strong>Precio:</strong> ${mentoringDetails.price}</p>
