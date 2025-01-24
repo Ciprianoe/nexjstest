@@ -73,7 +73,7 @@ const Mentorings: React.FC = () => {
             <div class="section">
               <h3 style="font-weight: bold;">Inversión Inicial</h3>
               <strong>Precio:</strong> $${details.price}<br>
-              <strong>Precio Promocional:</strong> $${details.promotionalPrice}<br>
+              ${details.promotionalPrice ? `<strong>Precio Promocional:</strong> $${details.promotionalPrice}<br>` : ''}
               <strong>Impuesto:</strong> ${details.tax}%<br>
               <strong>Actualizado el:</strong> ${formattedDate}<br>
               <strong>Disponibilidad:</strong> ${details.isActive ? 'Disponible' : 'No Disponible'}<br>
@@ -99,16 +99,15 @@ const Mentorings: React.FC = () => {
             Swal.fire({
               title: 'Cursos Disponibles',
               html: coursesHtml,
-              icon: 'success',
+              icon: 'success', // Cambiado a 'success' para mostrar un check
               confirmButtonText: 'Cerrar',
             });
           }
         });
       }
-    
-  }
-   
-};
+    }
+  };
+  
 
   const handleFetchCourses = async () => {
     setCoursesLoading(true);
