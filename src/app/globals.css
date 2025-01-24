@@ -39,3 +39,25 @@ body {
   }
 }
 
+.modal-content {
+  font-family: Arial, sans-serif;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section h3 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.rounded-full {
+  border-radius: 50%;
+}
