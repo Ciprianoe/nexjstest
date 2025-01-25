@@ -7,15 +7,16 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'load-qv4lgu7kga-uc.a.run.app',
-        pathname: '**',
+        pathname: '**',        
       },
     ],
   },
   // Other config options can go here
+  
 };
 
 // Deshabilitar reglas de ESLint
-const eslintConfig = {
+/* const eslintConfig = {
   rules: {
     '@typescript-eslint/no-unused-vars': 'off', // Deshabilitar la regla de variables no utilizadas
     '@typescript-eslint/no-explicit-any': 'off', // Deshabilitar la regla de uso de 'any'
@@ -23,6 +24,6 @@ const eslintConfig = {
     '@next/next/no-css-tags': 'off',
   },
 };
-
+ */
 
 export default nextConfig;

@@ -1,7 +1,7 @@
 // MentoringDetails.tsx
 import React from 'react';
 import AvailableCourses from './avaliblecourse';
-import Image from "next/image";
+
 
 const MentoringDetails: React.FC<{ mentoring: any }> = ({ mentoring }) => {
   console.log(mentoring)
@@ -17,7 +17,7 @@ const MentoringDetails: React.FC<{ mentoring: any }> = ({ mentoring }) => {
     <p className="mb-4"><strong>Impuesto:</strong> {mentoring.tax}%</p>
     
     <h2 className="text-xl font-bold text-primary mb-2">Información del Mentor:</h2>
-    <Image
+    <img
       src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoring.mentor.avatar}`}
       alt={mentoring.mentor.name}
       className="mt-2 w-32 h-32 rounded-full"

@@ -56,6 +56,7 @@ const CoursesComponent: React.FC = () => {
       try {
         const data = await fetchMentorings();
         setMentorings(data);
+        console.log(data)
       } catch (err) {
         const error = err as AxiosError;
         console.error('Error al cargar las mentorías:', error.response ? error.response.data : error.message);
@@ -120,7 +121,7 @@ const CoursesComponent: React.FC = () => {
                         <h3 className="font-semibold">Mentorías Disponibles:</h3>
                         <ul>
                           {mentorings.map(mentoring => (
-                            <li key={mentoring.categoryKey} className="mt-2">{mentoring.title}</li>
+                            <li key={mentoring.description} className="mt-2">{mentoring.name}</li>
                           ))}
                         </ul>
                       </div>

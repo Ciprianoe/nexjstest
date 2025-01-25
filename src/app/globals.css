@@ -39,3 +39,13 @@ body {
   }
 }
 
+html {
+  -webkit-text-size-adjust: 100%; /* Ajusta el tamaño del texto */
+  text-size-adjust: 100%; /* Para navegadores que no soportan el prefijo */
+}
+
+@supports (-moz-appearance: none) {
+  body {
+    -moz-osx-font-smoothing: grayscale; /* Solo para Firefox en macOS */
+  }
+}

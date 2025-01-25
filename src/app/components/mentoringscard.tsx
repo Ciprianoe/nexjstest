@@ -1,8 +1,8 @@
 // MentoringCard.tsx
-import Image from "next/image";
+
 import React, { useState } from 'react';
 import MentoringDetails from './mentoringsdetails';
-import { Autour_One } from "next/font/google";
+
 
 const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
   const [expanded, setExpanded] = useState(false);
@@ -14,7 +14,7 @@ const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
   return (
     <li className="flex flex-col gap-y-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10 max-w-sm">
       <div className="flex items-center">
-        <Image
+        <img
           src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoring.image}`}
           alt={mentoring.name}
           className="h-24 w-24 rounded-lg mr-4"

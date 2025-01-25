@@ -15,6 +15,7 @@ interface Class {
     orden: number;   
     video: string;
     key: string;
+    categoryKey:string;
 }
 
 
@@ -23,6 +24,7 @@ interface Characteristic {
     icon: string;
     isActive: boolean;
     name: string;
+    categoryKey:string;
 }
 
 export default interface Courses {
