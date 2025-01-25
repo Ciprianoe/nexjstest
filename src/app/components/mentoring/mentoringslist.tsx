@@ -1,6 +1,6 @@
 // components/MentoringsList.tsx
 import React from 'react';
-import Mentorings from '../interfaces/interfaces';
+import Mentorings from '../../interfaces/interfaces';
 
 interface MentoringsListProps {
   mentorings: Mentorings[];

@@ -1,5 +1,5 @@
 import React from 'react';
-import Courses from '../components/courses';
+import Courses from '../components/course/courses';
 import Navbar from '../components/navbar';
 
 const CoursesPage = () => {

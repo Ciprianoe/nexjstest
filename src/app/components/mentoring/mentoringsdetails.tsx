@@ -1,5 +1,5 @@
 import React from 'react';
-import AvailableCourses from './avaliblecourse';
+import AvailableCourses from '../../components/course/avaliblecourse';
 
 const MentoringDetails: React.FC<{ mentoring: any }> = ({ mentoring }) => {
 

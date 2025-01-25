@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { fetchCourses, fetchMentorings, fetchCoursesD } from '../services/api';
-import Courses from '../interfaces/courses';
-import Mentorings from '../interfaces/interfaces';
+import { fetchCourses, fetchMentorings, fetchCoursesD } from '../../services/api';
+import Courses from '../../interfaces/courses';
+import Mentorings from '../../interfaces/interfaces';
 import { AxiosError } from 'axios';
 import CourseItem from './courseitem';
 

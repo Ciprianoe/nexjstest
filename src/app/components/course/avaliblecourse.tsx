@@ -1,6 +1,6 @@
 // AvailableCourses.tsx
 import React, { useState } from 'react';
-import { fetchCourses } from '../services/api'; // Asegúrate de importar la función correcta
+import { fetchCourses } from '../../services/api'; // Asegúrate de importar la función correcta
 
 const AvailableCourses: React.FC<{ mentoringId: string }> = ({  }) => {
   const [courses, setCourses] = useState<any[]>([]);

@@ -1,7 +1,7 @@
 // components/CourseItem.tsx
 import React from 'react';
-import Courses from '../interfaces/courses';
-import Mentorings from '../interfaces/interfaces';
+import Courses from '../../interfaces/courses';
+import Mentorings from '../../interfaces/interfaces';
 
 interface CourseItemProps {
   course: Courses;

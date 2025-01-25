@@ -2,7 +2,7 @@
 // src/app/mentorings/MentoringsClient.tsx
 import React, { useEffect, useState } from 'react';
 import { fetchMentorings } from '../services/api';
-import Mentorings from '../components/mentorings';
+import Mentorings from '../components/mentoring/mentorings';
 import Mentoring from '../interfaces/interfaces';
 
 const MentoringsClient = () => {
