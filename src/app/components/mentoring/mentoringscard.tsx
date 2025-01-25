@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import {fetchCourses,fetchCoursesM, fetchCoursesD}from '../../services/api'
 import AvailableCourses from '../../components/course/avaliblecourse';
+import { Result } from 'postcss';
 
 const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
  
@@ -43,8 +44,12 @@ const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
       confirmButtonText: 'Cerrar',
       denyButtonText: 'Cursos Disponibles',
       showDenyButton: true,
+    }).then((result) => {
+      if (result.isDenied) {
+        // Llama a la función showCourses sin cerrar la modal actual
+        showCourses();
+      }
     });
-      
   };
 
   const showCourses = async () => {
