@@ -22,12 +22,20 @@ const API_URL = 'https://load-qv4lgu7kga-uc.a.run.app/';
 };
 
 
+export const fetchCoursesM = async (categoryKey:string) => {
+  const response = await fetch(`${API_URL}/courses/all`);
+  if (!response.ok) {
+    throw new Error('Error al cargar los cursos');
+  }
+  const data = await response.json(); // Convierte la respuesta a JSON
+  return data.data.items; // Devuelve el array de cursos
+};
+
 export const fetchCoursesD = async (pkey: string): Promise<courses> => {
   const response = await axios.get(`${API_URL}/Courses/show?pKey=${pkey}`);
   console.log("Data received from fetchCoursesD:", response);
   return response.data.data.item; // Asegúrate de que esto sea correcto según la respuesta de tu API
 };
-
 
 
 export const fetchMentoringDetails = async (pKey: string) => {
