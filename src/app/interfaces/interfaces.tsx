@@ -10,7 +10,7 @@ export default interface Characteristic {
     descriptionTres?: string; // Propiedad opcional
 }
 
-export default interface Mentorings {
+export  interface Mentorings {
     id: string;
     categoryKey: string;
     characteristics: Characteristic[];

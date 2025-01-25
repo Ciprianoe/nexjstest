@@ -1,13 +1,14 @@
 // src/app/mentorings/page.tsx
 import React from 'react';
-import Mentorings from '../components/mentorings';
 import Navbar from '../components/navbar';
+import MentoringsClient from './MentoringsClient';
+
 
 const MentoringsPage = () => {
   return (
-    <div>      
-      <Navbar/>
-      <Mentorings/>
+    <div>
+      <Navbar />
+      <MentoringsClient />
     </div>
   );
 };

@@ -6,8 +6,14 @@ import courses from '../interfaces/courses'
 const API_URL = 'https://load-qv4lgu7kga-uc.a.run.app/';
 
   export const fetchMentorings = async (): Promise<mentorings[]> => {
+    try{
     const response = await axios.get<{ data: { mentorings: mentorings[] } }>(`${API_URL}/mentorings/all`);
+    console.log("Response from API:", response.data);
     return response.data.data.mentorings;
+  } catch (error) {
+    console.error("Error fetching mentorings:", error);
+    return []; // Devuelve un array vacío en caso de error
+    }
   };
 
   export const fetchCourses = async (): Promise<courses[]> => {
