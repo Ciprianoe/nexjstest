@@ -2,10 +2,10 @@
 //components/navbar.tsx  BY CEEM
 import Link from 'next/link';
 import React from 'react';
-import { usePathname } from 'next/navigation'; // Importa usePathname
+import { usePathname } from 'next/navigation'; 
 
 const Navbar: React.FC = () => {
-    const pathname = usePathname(); // Obtén la ruta actual
+    const pathname = usePathname(); 
 
     return (
         <nav className="bg-white shadow-md">

@@ -2,18 +2,16 @@
 
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import {fetchCourses,fetchCoursesM, fetchCoursesD}from '../../services/api'
-import AvailableCourses from '../../components/course/avaliblecourse';
-import { Result } from 'postcss';
+import {fetchCoursesM}from '../../services/api'
 
 const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
  
- //const [showCourses, setShowCourses] = useState(false);
+ 
  
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     if (isNaN(date.getTime())) {
-      return "Fecha no válida"; // Manejo de fecha inválida
+      return "Fecha no válida"; 
     }
     return date.toLocaleDateString('es-ES', {
       year: 'numeric',
@@ -46,7 +44,7 @@ const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
       showDenyButton: true,
     }).then((result) => {
       if (result.isDenied) {
-        // Llama a la función showCourses sin cerrar la modal actual
+        
         showCourses();
       }
     });
@@ -58,7 +56,7 @@ const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
         throw new Error('La categoría no está definida');
       }
       const courses = await fetchCoursesM(mentoring.categoryKey);
-      console.log(courses); // Verifica la respuesta aquí
+      //console.log(courses); 
       if (!Array.isArray(courses)) {
         throw new Error('La respuesta no es un array');
       }
@@ -80,36 +78,7 @@ const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
     }
   };
 
-  /* const showCourses = async () => {
-    try {
-      const courses = await fetchCourses(); // Asegúrate de que mentoring.categoryKey esté definido
-      const coursesList = courses.map((course: any) => `<li>${course.name}</li>`).join('');
-      Swal.fire({
-        title: 'Cursos Disponibles',
-        html: `<ul>${coursesList}</ul>`,
-        icon: 'info',
-        confirmButtonText: 'Cerrar',
-      });
-    } catch (error) {
-      Swal.fire({
-        title: 'Error',
-        text: 'No se pudieron cargar los cursos.',
-        icon: 'error',
-        confirmButtonText: 'Cerrar',
-      });
-    }
-  }; */
- /*  const showCourses = () => {
-    const coursesList = mentoring.courses.map((course: any) => `<li>${course.name}</li>`).join('');
-    Swal.fire({
-      title: 'Cursos Disponibles',
-      html: `<ul>${coursesList}</ul>`,
-      icon: 'info',
-      confirmButtonText: 'Cerrar',
-    });
-  }; */
-
-  return (
+   return (
     <li className="flex flex-col gap-y-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10 max-w-sm">
       <div className="flex items-center">
         <img
@@ -123,10 +92,7 @@ const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
       </div>
       <button onClick={toggleDetails} className="mt-2 bg-blue-500 text-white rounded px-4 py-2">
         Más info
-      </button>
-      {/* <button onClick={showCourses} className="mt-2 bg-gray-300 text-black rounded px-4 py-2">
-        Cursos disponibles
-      </button> */}
+      </button>   
     </li>
   );
 };

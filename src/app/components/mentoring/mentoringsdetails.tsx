@@ -6,7 +6,7 @@ const MentoringDetails: React.FC<{ mentoring: any }> = ({ mentoring }) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     if (isNaN(date.getTime())) {
-      return "Fecha no válida"; // Manejo de fecha inválida
+      return "Fecha no válida"; 
     }
     return date.toLocaleDateString('es-ES', {
       year: 'numeric',
