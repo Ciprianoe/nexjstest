@@ -2,7 +2,6 @@
 // components/navbar.tsx  BY CEEM
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
     const [isActive, setIsActive] = useState(false);

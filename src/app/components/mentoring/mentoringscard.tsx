@@ -82,21 +82,22 @@ const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
   };
 
   return (
-    <li style={{ display: 'flex', flexDirection: 'column', gap: '1rem', borderRadius: '1rem', backgroundColor: 'white', padding: '1.5rem', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', outline: '1px solid rgba(0, 0, 0, 0.05)', maxWidth: '20rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img
-          src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoring.image}`}
-          alt={mentoring.name}
-          style={{ height: '6rem', width: '6rem', borderRadius: '0.5rem', marginRight: '1rem' }}
-          width={"800"}
-          height={"500"}
-        />
-        <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'blue' }}>{mentoring.name}</h2>
-      </div>
-      <button onClick={toggleDetails} style={{ marginTop: '0.5rem', backgroundColor: 'blue', color: 'white', borderRadius: '0.25rem', padding: '0.5rem 1rem' }}>
-        Más info
-      </button>   
-    </li>
+    <li className="box has-background-dark has-text-white" style={{ maxWidth: '20rem' }}>
+    <div className="is-flex is-align-items-center">
+      <img
+        src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoring.image}`}
+        alt={mentoring.name}
+        className="image is-128x128" // Ajusta el tamaño de la imagen según sea necesario
+        width="800"
+        height="500"
+      />
+      <h2 className="title is-5 has-text-primary">{mentoring.name}</h2>
+    </div>
+    <button onClick={toggleDetails} className="button is-primary mt-2">
+      Más info
+    </button>
+  </li>
+  
   );
 };
 

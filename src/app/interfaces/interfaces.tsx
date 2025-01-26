@@ -1,6 +1,9 @@
 "use client";
 
+import { Key } from "react";
+
 export default interface Characteristic {
+    categoryKey: Key | null | undefined;
     description: string;
     icon: string;
     isActive: boolean;

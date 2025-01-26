@@ -27,40 +27,25 @@ const CourseItem: React.FC<CourseItemProps> = ({
   showMentorings,
 }) => {
   return (
-    <li>
-      <div>
-        <img src={`https://load-qv4lgu7kga-uc.a.run.app/images/${course.image}`} alt={course.name} />
-        <h2>{course.name}</h2>
+    <li className="box has-background-dark has-text-white" style={{ maxWidth: '20rem' }}>
+      <div className="is-flex is-align-items-center">
+        <img 
+          src={`https://load-qv4lgu7kga-uc.a.run.app/images/${course.image}`} 
+          alt={course.name} 
+          className="image is-128x128" 
+          width="800" 
+          height="500" 
+        />
+        <h2 className="title is-5 has-text-primary">{course.name}</h2>
       </div>
-
-      <button onClick={() => toggleDetails(index)}>
+  
+      <button onClick={() => toggleDetails(index)} className="button is-primary mt-2">
         {expandedIndex === index ? 'Ver menos' : 'Más info'}
       </button>
       {expandedIndex === index && courseDetails ? (
         <div>
           <p>{courseDetails.description}</p>
-          <p><strong>Título:</strong> {courseDetails.title}</p>
-          <p><strong>Precio:</strong> ${courseDetails.price}</p>
-          <p><strong>Impuesto:</strong> {courseDetails.tax}%</p>
-          <p><strong>Última Actualización:</strong> {new Date(courseDetails.updatedAt).toLocaleDateString()}</p>
-          <p><strong>Creado el:</strong> {new Date(courseDetails.createdAt).toLocaleDateString()}</p>
-          <p><strong>Ranking:</strong> {courseDetails.ranking}</p>
-          <p><strong>Cantidad:</strong> {courseDetails.quantity || "No disponible"}</p>
-          <p><strong>Vistas:</strong> {courseDetails.view}</p>
-          <div>
-            <h2>Material de Apoyo:</h2>
-            {courseDetails.class.map((courseClass, index) => (
-              <div key={index}>
-                <p><strong>Clase #{index + 1}:</strong> {courseClass.name}</p>
-                <p><strong>Recursos:</strong> {courseClass.resource.name}</p>
-              </div>
-            ))}
-          </div>
-          <div>
-            <button onClick={handleFetchMentorings}>
-              Mentorías Disponibles
-            </button>
-          </div>
+          <button onClick={handleFetchMentorings}>Mentorías Disponibles</button>
           {mentoringsLoading ? (
             <p>Cargando Mentorías...</p>
           ) : (
@@ -69,7 +54,7 @@ const CourseItem: React.FC<CourseItemProps> = ({
                 <h3>Mentorías Disponibles:</h3>
                 <ul>
                   {mentorings.map(mentoring => (
-                    <li key={mentoring.description}>{mentoring.name}</li>
+                    <li key={mentoring.categoryKey}>{mentoring.name}</li>
                   ))}
                 </ul>
               </div>
@@ -77,7 +62,10 @@ const CourseItem: React.FC<CourseItemProps> = ({
           )}
         </div>
       ) : (
-        expandedIndex === index && <div>No hay detalles del curso disponibles.</div>
+        expandedIndex === index && 
+        <div className="box has-background-dark has-text-white" style={{ maxWidth: '20rem' }}>
+          No hay detalles del curso disponibles.
+        </div>
       )}
     </li>
   );

@@ -71,28 +71,31 @@ const CoursesComponent: React.FC = () => {
 
   return (
     <div>
-      <h1>Cursos</h1>
-      {courses.length === 0 ? (
-        <div>No hay cursos disponibles.</div>
-      ) : (
-        <ul>
-          {courses.map((course, index) => (
-            <CourseItem 
-              key={course.categoryKey} 
-              course={course} 
-              index={index} 
-              toggleDetails={toggleDetails} 
-              expandedIndex={expandedIndex} 
-              courseDetails={courseDetails} 
-              handleFetchMentorings={handleFetchMentorings} 
-              mentorings={mentorings} 
-              mentoringsLoading={mentoringsLoading} 
-              showMentorings={showMentorings} 
-            />
-          ))}
-        </ul>
-      )}
-    </div>
+    <h1 className="title is-1 has-text-primary">Cursos</h1>
+    {courses.length === 0 ? (
+      <div className="box has-background-dark has-text-white" style={{ maxWidth: '20rem' }}>
+        No hay cursos disponibles.
+      </div>
+    ) : (
+      <ul>
+        {courses.map((course, index) => (
+          <CourseItem 
+            key={course.categoryKey} 
+            course={course} 
+            index={index} 
+            toggleDetails={toggleDetails} 
+            expandedIndex={expandedIndex} 
+            courseDetails={courseDetails} 
+            handleFetchMentorings={handleFetchMentorings} 
+            mentorings={mentorings} 
+            mentoringsLoading={mentoringsLoading} 
+            showMentorings={showMentorings} 
+          />
+        ))}
+      </ul>
+    )}
+  </div>
+  
   );
 };
 
