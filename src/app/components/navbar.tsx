@@ -1,5 +1,5 @@
 "use client"; 
-//components/navbar.tsx  BY CEEM
+// components/navbar.tsx  BY CEEM
 import Link from 'next/link';
 import React from 'react';
 import { usePathname } from 'next/navigation'; 
@@ -8,18 +8,18 @@ const Navbar: React.FC = () => {
     const pathname = usePathname(); 
 
     return (
-        <nav className="bg-white shadow-md">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
-                    <div className="flex">
-                        <div className="flex-shrink-0 space-x-4">
-                            <Link href="/" className={`text-xl font-bold ${pathname === '/' ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
+        <nav style={{ backgroundColor: 'white', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
+            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', height: '64px' }}>
+                    <div style={{ display: 'flex' }}>
+                        <div style={{ display: 'flex', flexShrink: 0, gap: '1rem' }}>
+                            <Link href="/" style={{ fontSize: '1.25rem', fontWeight: 'bold', color: pathname === '/' ? 'blue' : 'gray' }}>
                                 Home
                             </Link>
-                            <Link href="/mentorings" className={`text-gray-700 hover:text-primary ${pathname === '/mentorings' ? 'text-primary' : ''}`}>
+                            <Link href="/mentorings" style={{ color: 'gray' }}>
                                 Mentorías
                             </Link>
-                            <Link href="/courses" className={`text-gray-700 hover:text-primary ${pathname === '/courses' ? 'text-primary' : ''}`}>
+                            <Link href="/courses" style={{ color: 'gray' }}>
                                 Cursos
                             </Link>
                         </div>

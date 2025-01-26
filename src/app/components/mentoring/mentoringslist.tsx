@@ -1,4 +1,3 @@
-// components/MentoringsList.tsx
 import React from 'react';
 import Mentorings from '../../interfaces/interfaces';
 
@@ -17,11 +16,11 @@ const MentoringsList: React.FC<MentoringsListProps> = ({ mentorings, loading }) 
   }
 
   return (
-    <div className="mt-4">
-      <h3 className="font-semibold">Mentorías Disponibles JAH!!!!:</h3>
+    <div>
+      <h3>Mentorías Disponibles JAH!!!!:</h3>
       <ul>
         {mentorings.map(mentoring => (
-          <li key={mentoring.description} className="mt-2">{mentoring.name}</li>
+          <li key={mentoring.description}>{mentoring.name}</li>
         ))}
       </ul>
     </div>

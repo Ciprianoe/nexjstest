@@ -7,7 +7,7 @@ import Mentoring from '../interfaces/interfaces';
 
 const MentoringsClient = () => {
   const [mentorings, setMentorings] = useState<Mentoring[]>([]);
-  const [error, setError] = useState<string | null>(null); // Estado para manejar errores
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadMentorings = async () => {
@@ -16,7 +16,7 @@ const MentoringsClient = () => {
         setMentorings(data);
       } catch (error) {
         console.error("Error al cargar mentorías:", error);
-        setError("No se pudieron cargar las mentorías. Intenta de nuevo más tarde."); // Mensaje de error
+        setError("No se pudieron cargar las mentorías. Intenta de nuevo más tarde.");
       }
     };
 
@@ -25,7 +25,7 @@ const MentoringsClient = () => {
 
   return (
     <div>
-      {error && <div className="error-message">{error}</div>} {/* Mostrar mensaje de error si existe */}
+      {error && <div>{error}</div>}
       <Mentorings mentorings={mentorings} />
     </div>
   );

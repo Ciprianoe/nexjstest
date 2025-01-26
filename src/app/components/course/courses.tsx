@@ -70,12 +70,12 @@ const CoursesComponent: React.FC = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-2xl font-bold mb-4">Cursos</h1>
+    <div>
+      <h1>Cursos</h1>
       {courses.length === 0 ? (
         <div>No hay cursos disponibles.</div>
       ) : (
-        <ul className="space-y-4">
+        <ul>
           {courses.map((course, index) => (
             <CourseItem 
               key={course.categoryKey} 

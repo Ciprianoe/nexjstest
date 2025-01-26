@@ -1,13 +1,11 @@
 // MentoringCard.tsx
 
-import React, { useState } from 'react';
+import React from 'react';
 import Swal from 'sweetalert2';
-import {fetchCoursesM}from '../../services/api'
+import { fetchCoursesM } from '../../services/api';
 
 const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
- 
- 
- 
+  
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     if (isNaN(date.getTime())) {
@@ -21,7 +19,7 @@ const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
   };
 
   const toggleDetails = () => {
-    console.log(mentoring)
+    console.log(mentoring);
     Swal.fire({
       title: mentoring.name,
       html: `
@@ -51,7 +49,6 @@ const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
       showDenyButton: true,
     }).then((result) => {
       if (result.isDenied) {
-        
         showCourses();
       }
     });
@@ -63,7 +60,6 @@ const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
         throw new Error('La categoría no está definida');
       }
       const courses = await fetchCoursesM(mentoring.categoryKey);
-      //console.log(courses); 
       if (!Array.isArray(courses)) {
         throw new Error('La respuesta no es un array');
       }
@@ -85,19 +81,19 @@ const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
     }
   };
 
-   return (
-    <li className="flex flex-col gap-y-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10 max-w-sm">
-      <div className="flex items-center">
+  return (
+    <li style={{ display: 'flex', flexDirection: 'column', gap: '1rem', borderRadius: '1rem', backgroundColor: 'white', padding: '1.5rem', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', outline: '1px solid rgba(0, 0, 0, 0.05)', maxWidth: '20rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <img
           src={`https://load-qv4lgu7kga-uc.a.run.app/images/${mentoring.image}`}
           alt={mentoring.name}
-          className="h-24 w-24 rounded-lg mr-4"
+          style={{ height: '6rem', width: '6rem', borderRadius: '0.5rem', marginRight: '1rem' }}
           width={"800"}
           height={"500"}
         />
-        <h2 className="text-xl font-bold text-primary">{mentoring.name}</h2>
+        <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'blue' }}>{mentoring.name}</h2>
       </div>
-      <button onClick={toggleDetails} className="mt-2 bg-blue-500 text-white rounded px-4 py-2">
+      <button onClick={toggleDetails} style={{ marginTop: '0.5rem', backgroundColor: 'blue', color: 'white', borderRadius: '0.25rem', padding: '0.5rem 1rem' }}>
         Más info
       </button>   
     </li>

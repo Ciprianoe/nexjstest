@@ -27,17 +27,17 @@ const CourseItem: React.FC<CourseItemProps> = ({
   showMentorings,
 }) => {
   return (
-    <li className="mx-auto flex max-w-sm flex-col gap-y-4 rounded-xl bg-white p-6 shadow-lg outline outline-black/5 dark:bg-slate-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
-      <div className="flex items-center">
-        <img src={`https://load-qv4lgu7kga-uc.a.run.app/images/${course.image}`} alt={course.name} className="h-24 w-24 rounded-lg mr-4" />
-        <h2 className="text-xl font-bold text-primary">{course.name}</h2>
+    <li>
+      <div>
+        <img src={`https://load-qv4lgu7kga-uc.a.run.app/images/${course.image}`} alt={course.name} />
+        <h2>{course.name}</h2>
       </div>
 
-      <button onClick={() => toggleDetails(index)} className="mt-2 bg-blue-500 text-white rounded px-4 py-2">
+      <button onClick={() => toggleDetails(index)}>
         {expandedIndex === index ? 'Ver menos' : 'Más info'}
       </button>
       {expandedIndex === index && courseDetails ? (
-        <div className="mt-4">
+        <div>
           <p>{courseDetails.description}</p>
           <p><strong>Título:</strong> {courseDetails.title}</p>
           <p><strong>Precio:</strong> ${courseDetails.price}</p>
@@ -48,16 +48,16 @@ const CourseItem: React.FC<CourseItemProps> = ({
           <p><strong>Cantidad:</strong> {courseDetails.quantity || "No disponible"}</p>
           <p><strong>Vistas:</strong> {courseDetails.view}</p>
           <div>
-            <h2 className="text-xl font-bold text-primary">Material de Apoyo:</h2>
+            <h2>Material de Apoyo:</h2>
             {courseDetails.class.map((courseClass, index) => (
-              <div key={index} className="mb-4">
+              <div key={index}>
                 <p><strong>Clase #{index + 1}:</strong> {courseClass.name}</p>
                 <p><strong>Recursos:</strong> {courseClass.resource.name}</p>
               </div>
             ))}
           </div>
-          <div className='flex justify-center mt-4'>
-            <button onClick={handleFetchMentorings} className="mt-4 bg-black text-white rounded px-4 py-2">
+          <div>
+            <button onClick={handleFetchMentorings}>
               Mentorías Disponibles
             </button>
           </div>
@@ -65,11 +65,11 @@ const CourseItem: React.FC<CourseItemProps> = ({
             <p>Cargando Mentorías...</p>
           ) : (
             showMentorings && mentorings.length > 0 && (
-              <div className="mt-4">
-                <h3 className="font-semibold">Mentorías Disponibles:</h3>
+              <div>
+                <h3>Mentorías Disponibles:</h3>
                 <ul>
                   {mentorings.map(mentoring => (
-                    <li key={mentoring.description} className="mt-2">{mentoring.name}</li>
+                    <li key={mentoring.description}>{mentoring.name}</li>
                   ))}
                 </ul>
               </div>

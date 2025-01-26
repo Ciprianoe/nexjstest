@@ -1,15 +1,15 @@
 "use client";
 // Mentorings.tsx
 // components/Mentorias.tsx BY CEEM
-import React, { useState } from 'react';
+import React from 'react';
 import MentoringCard from './mentoringscard';
 
 const Mentorings: React.FC<{ mentorings: any[] }> = ({ mentorings }) => {
   console.log(mentorings);
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-2xl font-bold mb-4">Mentorías</h1>
-      <ul className="flex flex-wrap justify-center space-x-4 space-y-4">
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Mentorías</h1>
+      <ul style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
         {mentorings.length > 0 ? (
           mentorings.map((mentoring, index) => (
             <MentoringCard key={mentoring.categoryKey} mentoring={mentoring} />
