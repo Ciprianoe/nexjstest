@@ -1,33 +1,50 @@
-"use client"; 
+"use client";
 // components/navbar.tsx  BY CEEM
 import Link from 'next/link';
-import React from 'react';
-import { usePathname } from 'next/navigation'; 
+import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
-const Navbar: React.FC = () => {
-    const pathname = usePathname(); 
-
+const Navbar = () => {
+    const [isActive, setIsActive] = useState(false);
+  
+    const toggleMenu = () => {
+      setIsActive(!isActive);
+    };
+  
     return (
-        <nav style={{ backgroundColor: 'white', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)' }}>
-            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', height: '64px' }}>
-                    <div style={{ display: 'flex' }}>
-                        <div style={{ display: 'flex', flexShrink: 0, gap: '1rem' }}>
-                            <Link href="/" style={{ fontSize: '1.25rem', fontWeight: 'bold', color: pathname === '/' ? 'blue' : 'gray' }}>
-                                Home
-                            </Link>
-                            <Link href="/mentorings" style={{ color: 'gray' }}>
-                                Mentorías
-                            </Link>
-                            <Link href="/courses" style={{ color: 'gray' }}>
-                                Cursos
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+      <nav className="navbar is-dark" role="navigation" aria-label="main navigation">
+        <div className="navbar-brand">
+        
+          <a
+            role="button"
+            className={`navbar-burger ${isActive ? 'is-active' : ''}`}
+            aria-label="menu"
+            aria-expanded={isActive}
+            onClick={toggleMenu}
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+  
+        <div id="navbarBasicExample" className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
+          <div className="navbar-start">
+            {/* Este enlace de Home solo se mostrará en el menú desplegable */}
+            <Link className="navbar-item" href="/">
+              Home
+            </Link>
+            <Link className="navbar-item" href="/mentorings">
+              Mentorías
+            </Link>
+            <Link className="navbar-item" href="/courses">
+              Cursos
+            </Link>
+          </div>
+        </div>
+      </nav>
     );
-};
-
-export default Navbar;
+  };
+  
+  export default Navbar;
