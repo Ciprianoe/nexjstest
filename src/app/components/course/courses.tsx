@@ -77,20 +77,21 @@ const CoursesComponent: React.FC = () => {
           No hay cursos disponibles.
         </div>
       ) : (
-        <ul>
+        <ul className="is-flex is-flex-wrap-wrap is-justify-content-center">
           {courses.map((course, index) => (
-            <CourseItem 
-              key={course.categoryKey} 
-              course={course} 
-              index={index} 
-              toggleDetails={toggleDetails} 
-              expandedIndex={expandedIndex} 
-              courseDetails={courseDetails} 
-              handleFetchMentorings={handleFetchMentorings} 
-              mentorings={mentorings} 
-              mentoringsLoading={mentoringsLoading} 
-              showMentorings={showMentorings} 
-            />
+            <li key={course.categoryKey} className="m-2">
+              <CourseItem 
+                course={course} 
+                index={index} 
+                toggleDetails={toggleDetails} 
+                expandedIndex={expandedIndex} 
+                courseDetails={courseDetails} 
+                handleFetchMentorings={handleFetchMentorings} 
+                mentorings={mentorings} 
+                mentoringsLoading={mentoringsLoading} 
+                showMentorings={showMentorings} 
+              />
+            </li>
           ))}
         </ul>
       )}
@@ -99,4 +100,3 @@ const CoursesComponent: React.FC = () => {
 };
 
 export default CoursesComponent;
-

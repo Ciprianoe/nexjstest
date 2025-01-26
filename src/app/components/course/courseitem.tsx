@@ -1,4 +1,3 @@
-// components/CourseItem.tsx
 import React from 'react';
 import Courses from '../../interfaces/courses';
 import Mentorings from '../../interfaces/interfaces';
@@ -27,7 +26,7 @@ const CourseItem: React.FC<CourseItemProps> = ({
   showMentorings,
 }) => {
   return (
-    <li className="box has-background-dark has-text-white" style={{ maxWidth: '20rem' }}>
+    <div className="box has-background-dark has-text-white" style={{ maxWidth: '20rem', width: '100%' }}>
       <div className="is-flex is-align-items-center">
         <img 
           src={`https://load-qv4lgu7kga-uc.a.run.app/images/${course.image}`} 
@@ -45,7 +44,7 @@ const CourseItem: React.FC<CourseItemProps> = ({
       {expandedIndex === index && courseDetails ? (
         <div>
           <p>{courseDetails.description}</p>
-          <button onClick={handleFetchMentorings}>Mentorías Disponibles</button>
+          <button className="button is-primary mt-2" onClick={handleFetchMentorings}>Mentorías Disponibles</button>
           {mentoringsLoading ? (
             <p>Cargando Mentorías...</p>
           ) : (
@@ -67,7 +66,7 @@ const CourseItem: React.FC<CourseItemProps> = ({
           No hay detalles del curso disponibles.
         </div>
       )}
-    </li>
+    </div>
   );
 };
 
