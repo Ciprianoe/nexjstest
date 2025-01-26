@@ -21,21 +21,28 @@ const MentoringCard: React.FC<{ mentoring: any }> = ({ mentoring }) => {
   };
 
   const toggleDetails = () => {
+    console.log(mentoring)
     Swal.fire({
       title: mentoring.name,
       html: `
+      <strong>Acerca de la mentoria:</strong><br><br>
         <strong>Título:</strong> ${mentoring.title}<br>
         <strong>Descripción:</strong> ${mentoring.description}<br>
-        <strong>Actualizado en:</strong> ${formatDate(mentoring.updatedAt)}<br>
-        <strong>Cantidad de Plazas:</strong> ${mentoring.quantity > 0 ? mentoring.quantity : "No disponible"}<br>
-        <strong>Ranking:</strong> ${mentoring.ranking ? Math.round(mentoring.ranking) : "0"}<br>
-        <strong>Precio:</strong> $${mentoring.price}<br>
-        <strong>Información del Mentor:</strong><br>
+        <strong>Actualizado el:</strong> ${formatDate(mentoring.updatedAt)}<br>
+        <strong>Cantidad de Plazas:</strong> ${mentoring.quantity > 0 ? mentoring.quantity : "Agotadas"}<br>
+        <strong>Duración:</strong> ${mentoring.characteristics[0].description}<br>
+        <strong>Ranking:</strong> ${mentoring.ranking ? Math.round(mentoring.ranking) : "0"}<br><br>
+        <strong>Inversión Inicial:</strong><br>
+        <br><strong>Precio:</strong>${mentoring.price} $<br>
+        <strong>Impuesto:</strong> ${mentoring.tax} $<br>
+        ${mentoring.promotionalPrice ? `<strong>Precio de promoción:</strong> ${mentoring.promotionalPrice}  $<br>` : ''}
+        <br><strong>Información del Mentor:</strong><br>
         <div style="display: flex; justify-content: center; margin-top: 10px;">
           <img src="https://load-qv4lgu7kga-uc.a.run.app/images/${mentoring.mentor.avatar}" alt="${mentoring.mentor.name}" style="width: 100px; height: 100px; border-radius: 50%;" />
         </div>
         <strong>Mentor:</strong> ${mentoring.mentor.name}<br>
         <strong>Email:</strong> ${mentoring.mentor.email}<br>
+        <strong>Mentorias:</strong> ${mentoring.mentor.numberOfMentoring}<br>
         <strong>Acerca del mentor:</strong> ${mentoring.mentor.biography}
       `,
       icon: 'info',
