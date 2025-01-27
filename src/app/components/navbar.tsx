@@ -1,5 +1,6 @@
+// components/navbar.tsx
 "use client";
-// components/navbar.tsx  BY CEEM
+
 import Link from 'next/link';
 import React, { useState } from 'react';
 
@@ -8,11 +9,11 @@ const Navbar = () => {
     const [isNotificationsActive, setIsNotificationsActive] = useState(false);
 
     const toggleMenu = () => {
-        setIsActive(!isActive);
+        setIsActive(prev => !prev);
     };
 
     const toggleNotifications = () => {
-        setIsNotificationsActive(!isNotificationsActive);
+        setIsNotificationsActive(prev => !prev);
     };
 
     return (
@@ -54,7 +55,7 @@ const Navbar = () => {
                             onClick={toggleNotifications}
                         >
                             <span className="icon" style={{ position: 'relative' }}>
-                                <i className="fas fa-bell"></i>
+                                <i className="fas fa-bell" style={{ color: 'rgba(128, 128, 128, 0.8)' }}></i> {/* Color gris más sólido */}
                                 <span className="tag is-danger is-small" style={{ 
                                     position: 'absolute', 
                                     top: '0', 
@@ -77,7 +78,7 @@ const Navbar = () => {
                     </div>
                     <div className="navbar-item">
                         <span className="icon has-text-white">
-                            <i className="fas fa-user"></i>
+                            <i className="fas fa-user" style={{ color: 'rgba(128, 128, 128, 0.8)' }}></i> {/* Color gris más sólido */}
                         </span>
                     </div>
                 </div>

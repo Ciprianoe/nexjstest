@@ -25,25 +25,39 @@ const CourseItem: React.FC<CourseItemProps> = ({
   mentoringsLoading,
   showMentorings,
 }) => {
+  console.log(courseDetails);
+
   return (
     <div className="box has-background-dark has-text-white" style={{ maxWidth: '20rem', width: '100%' }}>
       <div className="is-flex is-align-items-center">
-        <img 
-          src={`https://load-qv4lgu7kga-uc.a.run.app/images/${course.image}`} 
-          alt={course.name} 
-          className="image is-128x128" 
-          width="800" 
-          height="500" 
+        <img
+          src={`https://load-qv4lgu7kga-uc.a.run.app/images/${course.image}`}
+          alt={course.name}
+          className="image is-128x128"
+          width="800"
+          height="500"
         />
         <h2 className="title is-5 has-text-primary">{course.name}</h2>
       </div>
-  
+
       <button onClick={() => toggleDetails(index)} className="button is-primary mt-2">
         {expandedIndex === index ? 'Ver menos' : 'Más info'}
       </button>
       {expandedIndex === index && courseDetails ? (
         <div>
-          <p>{courseDetails.description}</p>
+          <p>{courseDetails.description}</p> <br/>
+          <p>Precio: {courseDetails.price} $</p>
+          <p>Duracion: {courseDetails.characteristics[0].description}</p>
+          <p>Plazas: {courseDetails.quantity}</p>
+          <p>Ranking: {courseDetails.ranking}</p>
+          <p>Taxes: {courseDetails.tax}</p>
+          <p>Actualizado el: {new Date(courseDetails.updatedAt).toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })} </p>
+          <p>Vistas: {courseDetails.view}</p><br/>
+
           <button className="button is-primary mt-2" onClick={handleFetchMentorings}>Mentorías Disponibles</button>
           {mentoringsLoading ? (
             <p>Cargando Mentorías...</p>
@@ -61,7 +75,7 @@ const CourseItem: React.FC<CourseItemProps> = ({
           )}
         </div>
       ) : (
-        expandedIndex === index && 
+        expandedIndex === index &&
         <div className="box has-background-dark has-text-white" style={{ maxWidth: '20rem' }}>
           No hay detalles del curso disponibles.
         </div>
