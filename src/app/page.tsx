@@ -14,7 +14,7 @@ export default function Home() {
         <div className="column is-one-third">
           <div className="box">
             <h3 className="title is-4">Mentoría en Desarrollo Web</h3>
-            <img src="https://via.placeholder.com/150" alt="Desarrollo Web" />
+            
             <p>Aprende a crear aplicaciones web modernas utilizando tecnologías como React y Next.js.</p>
           </div>
         </div>
@@ -23,7 +23,7 @@ export default function Home() {
         <div className="column is-one-third">
           <div className="box">
             <h3 className="title is-4">Mentoría en Marketing Digital</h3>
-            <img src="https://via.placeholder.com/150" alt="Marketing Digital" />
+           
             <p>Descubre las mejores estrategias para impulsar tu negocio en línea.</p>
           </div>
         </div>
@@ -32,7 +32,7 @@ export default function Home() {
         <div className="column is-one-third">
           <div className="box">
             <h3 className="title is-4">Mentoría en Diseño Gráfico</h3>
-            <img src="https://via.placeholder.com/150" alt="Diseño Gráfico" />
+            
             <p>Mejora tus habilidades de diseño y aprende a utilizar herramientas como Photoshop e Illustrator.</p>
           </div>
         </div>
